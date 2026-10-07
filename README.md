@@ -2,7 +2,7 @@
 
 Personal interactive portfolio website styled as a desktop OS environment. Built with pure Vanilla HTML, CSS, and JavaScript.
 
-**Live Demo:** [kaplz.is-a.dev](https://kaplz.is-a.dev) | [kaplz.github.io](https://kaplz.github.io) | [kaplz.vercel.app](https://kaplz.vercel.app)
+🔗 **Live Demo:** [kaplz.is-a.dev](https://kaplz.is-a.dev) | [kaplz.github.io](https://kaplz.github.io) | [kaplz.vercel.app](https://kaplz.vercel.app)
 
 ---
 
