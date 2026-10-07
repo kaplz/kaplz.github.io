@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
+  <title>kaplz // desktop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-light">
+
+  <div class="wallpaper-bg" id="wallpaper-bg"></div>
+  <canvas id="weather-canvas"></canvas>
+
+  <header class="top-bar">
+    <div class="bar-group">
+      <div class="pill brand-pill">kaplz</div>
+      <div class="pill ws-pill" id="ws-switcher">
+        <span class="active" data-ws="all" onclick="switchWorkspace('all')">1: все</span>
+        <span data-ws="system" onclick="switchWorkspace('system')">2: инфо</span>
+        <span data-ws="projects" onclick="switchWorkspace('projects')">3: проекты</span>
+        <span data-ws="music" onclick="switchWorkspace('music')">4: плеер</span>
+      </div>
+      <button class="pill action-pill" id="scatter-btn" onclick="scatterWindows()">разбросать</button>
+      <button class="pill action-pill" id="quick-theme-btn" onclick="toggleThemeMode()">тема: светлая</button>
+    </div>
+
+    <div class="bar-group">
+      <div class="pill hint-pill">[0] меню • [1–6] окна • [←/→] столы</div>
+      <div class="pill clock-pill" id="clock">00:00:00</div>
+    </div>
+  </header>
+
+  <main class="desktop-area" id="desktop">
+
+    <!-- ОКНО [1]: konsole -->
+    <section class="window active-win" id="win-1" data-ws="system" style="width: 635px;">
+      <div class="win-header">
+        <div class="win-title"><span class="key-tag">1</span> konsole — goshqw@goshaPC:~</div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-1')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-1')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-1')"></button>
+        </div>
+      </div>
+      <div class="win-body term-body">
+        <div class="fastfetch-layout">
+          <div class="art-card">
+            <pre class="anime-art" id="animated-ascii"></pre>
+          </div>
+
+          <div class="ff-specs">
+            <div class="ff-header">goshqw@goshaPC</div>
+            <div class="ff-line">──────────────────────────</div>
+            <div><span class="k">OS:</span> CachyOS x86_64</div>
+            <div><span class="k">Kernel:</span> Linux 7.2.9-1-cachyos</div>
+            <div><span class="k">Shell:</span> fish 4.9.3</div>
+            <div><span class="k">DE:</span> KDE Plasma 6.7.5 (Wayland)</div>
+            <div><span class="k">Terminal:</span> konsole 26.8.1</div>
+            <div><span class="k">Display:</span> Mi 27" 2560x1440 @ 144Hz</div>
+            <div><span class="k">CPU:</span> AMD Ryzen 5 5500</div>
+            <div><span class="k">GPU:</span> AMD Radeon RX 6600</div>
+            <div><span class="k">Memory:</span> 32 GiB DDR4</div>
+            <div><span class="k">Storage:</span> 256 GiB NVMe + 2 TiB HDD</div>
+            <div class="palette-row">
+              <span style="background:var(--accent)"></span>
+              <span style="background:var(--accent-2)"></span>
+              <span style="background:var(--mint)"></span>
+              <span style="background:var(--subtext)"></span>
+              <span style="background:var(--text)"></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="term-log">
+          <div class="term-welcome">Введи <span class="hl">help</span> или нажми на команду:</div>
+          <div class="chip-row">
+            <span class="cmd-chip" onclick="execCmd('open all')">open all</span>
+            <span class="cmd-chip" onclick="execCmd('theme')">theme</span>
+            <span class="cmd-chip" onclick="execCmd('readme')">readme</span>
+            <span class="cmd-chip" onclick="execCmd('devices')">devices</span>
+            <span class="cmd-chip" onclick="execCmd('projects')">projects</span>
+            <span class="cmd-chip" onclick="execCmd('music')">music</span>
+            <span class="cmd-chip" onclick="execCmd('clear')">clear</span>
+          </div>
+        </div>
+
+        <div class="term-input-line">
+          <span class="prompt-tilde">~</span>
+          <span class="prompt-arrow">❯</span>
+          <input type="text" id="term-in" class="term-input" placeholder="help, theme, open all, readme..." autocomplete="off" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ОКНО [2]: README.md (Без лишней биографии, чистый стек и прямые ссылки) -->
+    <section class="window" id="win-2" data-ws="system" style="width: 390px;">
+      <div class="win-header">
+        <div class="win-title"><span class="key-tag">2</span> README.md</div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-2')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-2')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-2')"></button>
+        </div>
+      </div>
+      <div class="win-body readme-body">
+        <h2>kaplz</h2>
+        <p style="margin-bottom: 8px;">high school student & developer</p>
+
+        <h3>Стек</h3>
+        <ul>
+          <li><strong>Языки:</strong> Python, JS, HTML/CSS, SQL, Rust</li>
+          <li><strong>Технологии:</strong> Linux, Flask, Aiogram</li>
+          <li><strong>Интересы:</strong> 3D-печать, програмирование, пк игры</li>
+        </ul>
+
+        <div class="btn-group">
+          <a href="https://github.com/kaplz" target="_blank" rel="noopener noreferrer" class="theme-btn">GitHub ↗</a>
+          <a href="https://t.me/kaplz" target="_blank" rel="noopener noreferrer" class="theme-btn secondary">Telegram ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОКНО [3]: Девайсы -->
+    <section class="window" id="win-3" data-ws="projects" style="width: 415px;">
+      <div class="win-header">
+        <div class="win-title"><span class="key-tag">3</span> devices.gallery</div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-3')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-3')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-3')"></button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="tab-strip" id="dev-tabs">
+          <button class="tab-btn active" onclick="switchDevice(0)">ASUS ExpertBook</button>
+          <button class="tab-btn" onclick="switchDevice(1)">Adventurer 5M</button>
+          <button class="tab-btn" onclick="switchDevice(2)">Nothing Phone (1)</button>
+        </div>
+
+        <div class="photo-box">
+          <img id="dev-img" src="" alt="Device" referrerpolicy="no-referrer" />
+        </div>
+
+        <div class="specs-card" id="dev-specs"></div>
+      </div>
+    </section>
+
+    <!-- ОКНО [4]: Проекты -->
+    <section class="window" id="win-4" data-ws="projects" style="width: 425px;">
+      <div class="win-header">
+        <div class="win-title">
+          <span class="key-tag">4</span>
+          <span id="proj-win-title">projects — filament-studio</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-4')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-4')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-4')"></button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="proj-carousel">
+          <button class="proj-nav-arrow" onclick="prevProject()">‹</button>
+
+          <div class="proj-slide-content">
+            <div class="proj-top-row">
+              <h3 class="proj-heading" id="proj-name">Filament Studio</h3>
+              <span class="proj-counter" id="proj-counter">1 / 3</span>
+            </div>
+            <p class="proj-desc" id="proj-desc"></p>
+
+            <div class="calc-box" id="filament-calc-widget">
+              <div class="calc-top">
+                <span>Пластик:</span>
+                <div class="mat-pills">
+                  <button class="active" onclick="selectMat(this, 'PETG', 240, 1.8)">PETG</button>
+                  <button onclick="selectMat(this, 'PLA', 210, 1.5)">PLA</button>
+                  <button onclick="selectMat(this, 'TPU 95A', 225, 2.4)">TPU</button>
+                </div>
+              </div>
+              <div class="calc-slider">
+                <span>Вес: <strong id="w-val">140</strong> г</span>
+                <input type="range" id="w-slider" min="10" max="500" value="140" oninput="calcFilament()" />
+              </div>
+              <div class="calc-result" id="mat-out">
+                PETG (240°C) • Выйдет ~252 ₽
+              </div>
+            </div>
+
+            <div class="tags-row" id="proj-tags"></div>
+
+            <div class="btn-group">
+              <a href="#" id="proj-link" target="_blank" rel="noopener noreferrer" class="theme-btn">Открыть проект ↗</a>
+              <a href="#" id="proj-repo" target="_blank" rel="noopener noreferrer" class="theme-btn secondary">GitHub ↗</a>
+            </div>
+          </div>
+
+          <button class="proj-nav-arrow" onclick="nextProject()">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОКНО [5]: Плеер -->
+    <section class="window" id="win-5" data-ws="music" style="width: 375px;">
+      <div class="win-header">
+        <div class="win-title"><span class="key-tag">5</span> music.playlist</div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-5')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-5')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-5')"></button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="player-box">
+          <div class="player-header">
+            <div>
+              <div class="player-sub">KAPLZ // PLAYLIST (50)</div>
+              <div id="now-playing-title" class="player-title">01. Шарлот — Щека На Щеку</div>
+            </div>
+            <div class="eq-bars" id="eq-vis">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <audio id="audio-player" onended="nextTrack()"></audio>
+
+          <div class="playlist-scroll" id="track-list"></div>
+
+          <div class="player-bar">
+            <button class="theme-btn play-main" id="play-btn" onclick="toggleMusic()">Play</button>
+            <button class="theme-btn secondary small-btn" onclick="prevTrack()">Prev</button>
+            <button class="theme-btn secondary small-btn" onclick="nextTrack()">Next</button>
+            <div class="vol-box">
+              <span>vol</span>
+              <input type="range" id="vol-slider" min="0" max="100" value="50" oninput="changeVolume(this.value)" title="Громкость" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОКНО [6]: Переключатель темы -->
+    <section class="window" id="win-6" data-ws="music" style="width: 340px;">
+      <div class="win-header">
+        <div class="win-title"><span class="key-tag">6</span> theme.switcher</div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" onclick="minimizeWin('win-6')"></button>
+          <button class="win-btn btn-max" onclick="maximizeWin('win-6')"></button>
+          <button class="win-btn btn-close" onclick="closeWin('win-6')"></button>
+        </div>
+      </div>
+      <div class="win-body">
+        <div class="theme-cards">
+          <div class="theme-option active" id="opt-light" onclick="setThemeMode('light')">
+            <div>
+              <div class="t-name">Light // Pastel Anime</div>
+              <div class="t-desc">Светлая кремово-розовая палитра и лепестки сакуры</div>
+            </div>
+          </div>
+
+          <div class="theme-option" id="opt-dark" onclick="setThemeMode('dark')">
+            <div>
+              <div class="t-name">Dark // Rain World</div>
+              <div class="t-desc">Палитра Songs & Rhythms, ночной мох и споры</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.74rem; color: var(--subtext);" id="wp-counter-label">Обои: 1 / 3</span>
+          <button class="theme-btn secondary small-btn" onclick="cycleWallpaper()">Сменить обои</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Меню запуска -->
+  <div class="app-launcher hidden" id="app-launcher">
+    <div class="launcher-title">Запуск приложений [0]</div>
+    <button class="launcher-item" onclick="reopenWin('win-1')"><span>[1]</span> konsole</button>
+    <button class="launcher-item" onclick="reopenWin('win-2')"><span>[2]</span> README.md</button>
+    <button class="launcher-item" onclick="reopenWin('win-3')"><span>[3]</span> devices.gallery</button>
+    <button class="launcher-item" onclick="reopenWin('win-4')"><span>[4]</span> projects</button>
+    <button class="launcher-item" onclick="reopenWin('win-5')"><span>[5]</span> music.playlist</button>
+    <button class="launcher-item" onclick="reopenWin('win-6')"><span>[6]</span> theme.switcher</button>
+    <hr class="launcher-sep" />
+    <button class="launcher-item restore-all" onclick="reopenAll()">Открыть все окна</button>
+  </div>
+
+  <!-- Нижний Док -->
+  <footer class="dock" id="dock">
+    <div class="dock-launcher-btn" onclick="toggleLauncher()" title="Клавиша 0">
+      <span>[0] меню</span>
+    </div>
+
+    <div class="dock-divider"></div>
+
+    <div class="dock-item is-open is-focused" id="dock-win-1" data-target="win-1" onclick="dockClick('win-1')">
+      <span class="dock-key">[1]</span> <span class="dock-label">konsole</span>
+    </div>
+    <div class="dock-item is-open" id="dock-win-2" data-target="win-2" onclick="dockClick('win-2')">
+      <span class="dock-key">[2]</span> <span class="dock-label">README</span>
+    </div>
+    <div class="dock-item is-open" id="dock-win-3" data-target="win-3" onclick="dockClick('win-3')">
+      <span class="dock-key">[3]</span> <span class="dock-label">devices</span>
+    </div>
+    <div class="dock-item is-open" id="dock-win-4" data-target="win-4" onclick="dockClick('win-4')">
+      <span class="dock-key">[4]</span> <span class="dock-label">projects</span>
+    </div>
+    <div class="dock-item is-open" id="dock-win-5" data-target="win-5" onclick="dockClick('win-5')">
+      <span class="dock-key">[5]</span> <span class="dock-label">music</span>
+    </div>
+    <div class="dock-item is-open" id="dock-win-6" data-target="win-6" onclick="dockClick('win-6')">
+      <span class="dock-key">[6]</span> <span class="dock-label">theme</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
