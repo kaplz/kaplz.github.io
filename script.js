@@ -516,7 +516,7 @@ const projectsList = [
     desc: 'Веб-сервис для анализа G-code, учета катушек пластика и точного расчета себестоимости 3D-печати.',
     hasCalculator: true,
     tags: ['Python', 'Flask', 'JS', 'SQL'],
-    link: 'https://filament-studio.vercel.app/',
+    link: 'https://filament.kaplz.is-a.dev/',
     repo: 'https://github.com/kaplz/filament-studio'
   },
   {
