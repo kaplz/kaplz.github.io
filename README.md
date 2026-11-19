@@ -11,7 +11,7 @@ Personal interactive portfolio website styled as a desktop OS environment. Built
 * **Dual Themes & Dynamic Weather:** Switch between Dark and Light modes with custom atmospheric canvas effects.
 * **Built-in Music Player:** Custom audio player featuring a curated playlist of 50 tracks.
 * **Interactive Terminal:** Functional command-line interface with custom commands.
-* **Project Showcase & Gear Gallery:** Quick access to my tools, devices, and flagship projects like [Filament Studio](https://filament-studio.vercel.app/).
+* **Project Showcase & Gear Gallery:** Quick access to my tools, devices, and flagship projects like [Filament Studio](https://filament.kaplz.is-a.dev/).
 * **Responsive Design:** Fully adapted for both desktop monitors and mobile screens.
 
 ### Tech Stack
